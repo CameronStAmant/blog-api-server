@@ -57,7 +57,6 @@ exports.create = [
         if (err) {
           return next(err);
         }
-        console.log(req.params.postid);
         res.redirect(post.url);
       });
     }
@@ -82,7 +81,7 @@ exports.show = async (req, res, next) => {
   const post = await Post.findById(req.params.postid).exec();
   // const comment = await Comment.find().exec();
 
-  res.render('post_detail', {
+  res.json({
     title: 'Post Details',
     post: post,
   });
