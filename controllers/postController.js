@@ -19,7 +19,7 @@ exports.index = (req, res, next) => {
 exports.index = async (req, res, next) => {
   const posts = await Post.find().exec();
 
-  res.render('post_list', {
+  res.json({
     title: 'All Posts',
     posts: posts,
   });
