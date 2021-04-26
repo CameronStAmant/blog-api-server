@@ -1,5 +1,4 @@
 const Post = require('../models/post');
-const Comment = require('../models/comment');
 const { body, validationResult } = require('express-validator');
 
 /*
@@ -37,7 +36,6 @@ exports.create = [
 
   (req, res, next) => {
     const errors = validationResult(req);
-    console.log(errors);
     if (!errors.isEmpty()) {
       res.render('new', {
         title: req.body.title,
