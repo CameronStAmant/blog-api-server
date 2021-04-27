@@ -9,7 +9,7 @@ const PostSchema = new Schema(
     timestamp: { type: Date, default: Date.now, required: true },
     published: { type: Boolean, required: true },
     author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    comment: { type: Schema.Types.ObjectId, ref: 'Comment' },
+    comments: { type: Array, required: true, default: [] },
   },
   { toJSON: { virtuals: true } }
 );

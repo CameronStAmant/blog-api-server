@@ -1,4 +1,6 @@
 const Comment = require('../models/comment');
+const Post = require('../models/post');
+
 const { body, validationResult } = require('express-validator');
 
 exports.create = [
@@ -14,15 +16,28 @@ exports.create = [
       const comment = new Comment({
         author: req.body.author,
         body: req.body.body,
-        post: req.body.post,
         timestamp: Date.now(),
       });
       comment.save((err) => {
         if (err) {
           return next(err);
         }
+        const updatePost = async () => {
+          const post = await Post.findById(req.body.post);
+          post.comments.push(comment._id);
+          await post.save();
+        };
+        updatePost();
         res.redirect('http://localhost:3001/posts/' + req.body.post);
       });
     }
   },
 ];
+
+exports.show = async (req, res, next) => {
+  const comments = await Post.findById(req.params.postid).exec();
+
+  res.json({
+    comments: comments,
+  });
+};
