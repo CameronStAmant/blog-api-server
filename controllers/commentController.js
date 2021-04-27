@@ -35,9 +35,12 @@ exports.create = [
 ];
 
 exports.show = async (req, res, next) => {
-  const comments = await Post.findById(req.params.postid).exec();
+  const post = await Post.findById(req.params.postid)
+    .populate('comments')
+    .exec();
+  // console.log(post);
 
   res.json({
-    comments: comments,
+    comments: post.comments,
   });
 };

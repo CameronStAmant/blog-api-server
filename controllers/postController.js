@@ -49,7 +49,6 @@ exports.create = [
         body: req.body.body,
         published: req.body.published,
         author: req.body.id,
-        comments: [],
       });
       post.save((err) => {
         if (err) {
