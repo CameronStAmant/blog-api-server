@@ -42,7 +42,6 @@ exports.show = async (req, res, next) => {
       populate: { path: 'author' },
     })
     .exec();
-  console.log(post);
 
   res.json({
     comments: post.comments,

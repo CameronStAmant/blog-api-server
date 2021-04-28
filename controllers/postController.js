@@ -16,7 +16,7 @@ exports.index = (req, res, next) => {
 
 // async
 exports.index = async (req, res, next) => {
-  const posts = await Post.find().exec();
+  const posts = await Post.find().sort({ timestamp: 'desc' }).exec();
 
   res.json({
     title: 'All Posts',
@@ -48,7 +48,7 @@ exports.create = [
         title: req.body.title,
         body: req.body.body,
         published: req.body.published,
-        author: req.body.id,
+        author: req.body.author,
       });
       post.save((err) => {
         if (err) {
