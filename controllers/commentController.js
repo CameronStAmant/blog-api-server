@@ -1,5 +1,6 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
+const User = require('../models/user');
 
 const { body, validationResult } = require('express-validator');
 
@@ -36,9 +37,12 @@ exports.create = [
 
 exports.show = async (req, res, next) => {
   const post = await Post.findById(req.params.postid)
-    .populate('comments')
+    .populate({
+      path: 'comments',
+      populate: { path: 'author' },
+    })
     .exec();
-  // console.log(post);
+  console.log(post);
 
   res.json({
     comments: post.comments,
