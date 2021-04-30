@@ -100,7 +100,6 @@ exports.update = [
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log(errors);
       res.render('edit', {
         title: req.body.title,
         body: req.body.body,
@@ -123,7 +122,9 @@ exports.update = [
           if (err) {
             return next(err);
           }
-          res.redirect(updatedPost.url);
+          return res.json({
+            url: updatedPost.url,
+          });
         }
       );
     }
