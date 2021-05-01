@@ -27,7 +27,7 @@ exports.create = [
           await post.save();
         };
         updatePost();
-        res.redirect('/posts/' + req.body.post);
+        return;
       });
     }
   },
