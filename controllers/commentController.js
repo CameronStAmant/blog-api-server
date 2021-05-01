@@ -27,7 +27,7 @@ exports.create = [
           await post.save();
         };
         updatePost();
-        res.redirect('http://localhost:3001/posts/' + req.body.post);
+        res.redirect('/posts/' + req.body.post);
       });
     }
   },

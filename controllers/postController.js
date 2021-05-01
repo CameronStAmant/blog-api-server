@@ -25,7 +25,7 @@ exports.index = async (req, res, next) => {
 };
 
 exports.new = (req, res, next) => {
-  res.render('post_form', {
+  res.json({
     title: 'New Post',
   });
 };
@@ -54,7 +54,9 @@ exports.create = [
         if (err) {
           return next(err);
         }
-        res.redirect(post.url);
+        return res.json({
+          url: post.url,
+        });
       });
     }
   },
