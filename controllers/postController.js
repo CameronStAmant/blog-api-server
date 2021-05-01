@@ -88,9 +88,7 @@ exports.show = async (req, res, next) => {
 
 exports.edit = async (req, res, next) => {
   const post = await Post.findById(req.params.postid).exec();
-
-  res.render('post_form', {
-    title: 'Update Post',
+  res.json({
     post: post,
   });
 };
@@ -138,6 +136,6 @@ exports.delete = (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect('/posts');
+    return;
   });
 };

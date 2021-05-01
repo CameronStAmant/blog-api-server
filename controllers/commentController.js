@@ -59,7 +59,7 @@ exports.delete = (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect('/');
+    return;
   });
 };
 
