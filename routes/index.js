@@ -1,21 +1,26 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
+require('../passport');
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+const index_controller = require('../controllers/indexController');
 
-router.get('/login', (req, res, next) => {
-  res.send('login page');
-});
+router.get('/', index_controller.index);
 
-router.post('/login', (req, res, next) => {
-  res.send('post login');
-});
+router.get('/login', index_controller.login);
 
-router.get('/logout', (req, res, next) => {
-  res.send('get logout');
-});
+router.post('/login', index_controller.login_post);
+
+router.get('/signup', index_controller.signUp);
+
+router.post('/signup', index_controller.signUp_post);
+
+router.get('/logout', index_controller.logout);
+
+router.get(
+  '/auth',
+  passport.authenticate('jwt', { session: false }),
+  index_controller.auth
+);
 
 module.exports = router;

@@ -1,6 +1,9 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
 const User = require('../models/user');
+const passport = require('passport');
+require('../passport');
+
 const { body, validationResult } = require('express-validator');
 
 exports.create = [
@@ -22,12 +25,12 @@ exports.create = [
           return next(err);
         }
         const updatePost = async () => {
-          const post = await Post.findById(req.body.post);
+          const post = await Post.findById(req.params.postid);
           post.comments.push(comment._id);
           await post.save();
         };
         updatePost();
-        return;
+        return res.json({ commented: 'success' });
       });
     }
   },
