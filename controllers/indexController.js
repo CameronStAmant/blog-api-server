@@ -47,10 +47,6 @@ exports.signUp_post = (req, res, next) => {
   });
 };
 
-exports.logout = (req, res, next) => {
-  res.send('get logout');
-};
-
 exports.auth = (req, res, next) => {
   res.json({
     response: true,

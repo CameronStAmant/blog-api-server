@@ -15,8 +15,6 @@ router.get('/signup', index_controller.signUp);
 
 router.post('/signup', index_controller.signUp_post);
 
-router.get('/logout', index_controller.logout);
-
 router.get(
   '/auth',
   passport.authenticate('jwt', { session: false }),
