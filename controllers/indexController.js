@@ -25,7 +25,20 @@ exports.login_post = (req, res, next) => {
       if (err) {
         res.send(err);
       }
-      const token = jwt.sign(user.toJSON(), process.env.JWT_Secret);
+      if (req.body.adminSite) {
+        if (user.admin) {
+          const token = jwt.sign(user.toJSON(), process.env.JWT_Secret);
+          return res.json({
+            response: 'Login successful',
+          });
+        } else {
+          return res.json({
+            response: 'Only admin are permitted to log into this site.',
+          });
+        }
+      } else {
+        const token = jwt.sign(user.toJSON(), process.env.JWT_Secret);
+      }
       return res.json({ user, token });
     });
   })(req, res);
