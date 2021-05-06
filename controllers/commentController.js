@@ -86,7 +86,6 @@ exports.update = [
       return;
     } else {
       const comment = new Comment({
-        author: '607a0bf4e185e7b95a3204ab',
         body: req.body.body,
         _id: req.params.commentId,
       });
