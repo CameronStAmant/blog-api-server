@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const passport = require('passport');
+const User = require('../models/user');
 const { body, validationResult } = require('express-validator');
 
 exports.index = (req, res, next) => {
@@ -43,7 +44,9 @@ exports.signUp_post = (req, res, next) => {
     if (err) {
       return next(err);
     }
-    return;
+    return res.json({
+      userCreation: 'success',
+    });
   });
 };
 
