@@ -49,6 +49,8 @@ exports.signUp_post = (req, res, next) => {
 
 exports.auth = (req, res, next) => {
   res.json({
+    username: req.user.username,
+    userId: req.user._id,
     response: true,
   });
 };
