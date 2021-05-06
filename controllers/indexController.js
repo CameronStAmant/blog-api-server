@@ -28,9 +28,7 @@ exports.login_post = (req, res, next) => {
       if (req.body.adminSite) {
         if (user.admin) {
           const token = jwt.sign(user.toJSON(), process.env.JWT_Secret);
-          return res.json({
-            response: 'Login successful',
-          });
+          return res.json({ user, token });
         } else {
           return res.json({
             response: 'Only admin are permitted to log into this site.',
