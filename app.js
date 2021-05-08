@@ -26,7 +26,6 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// app.use(cors());
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
@@ -34,11 +33,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// if (req.host === 'http://localhost:3001') {
-//   app.use('/', passport.authenticate('jwt', { session: false }), indexRouter);
-// } else {
 app.use('/', indexRouter);
-// }
 app.use('/users', usersRouter);
 app.use(
   '/posts',

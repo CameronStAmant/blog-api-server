@@ -36,8 +36,9 @@ exports.login_post = (req, res, next) => {
         }
       } else {
         const token = jwt.sign(user.toJSON(), process.env.JWT_Secret);
+        return res.json({ user, token });
       }
-      return res.json({ user, token });
+      // return res.json({ user, token });
     });
   })(req, res);
 };
