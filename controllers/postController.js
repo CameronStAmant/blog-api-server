@@ -1,32 +1,12 @@
 const Post = require('../models/post');
 const { body, validationResult } = require('express-validator');
 
-/*
-//Promise
-exports.index = (req, res, next) => {
-  const posts = Posts.find()
-    .exec()
-    .then((allPosts) => {
-      res.render('post_list', {
-        posts: allPosts,
-      });
-    });
-};
-*/
-
-// async
 exports.index = async (req, res, next) => {
   const posts = await Post.find().sort({ timestamp: 'desc' }).exec();
 
   res.json({
     title: 'All Posts',
     posts: posts,
-  });
-};
-
-exports.new = (req, res, next) => {
-  res.json({
-    title: 'New Post',
   });
 };
 
@@ -62,23 +42,8 @@ exports.create = [
   },
 ];
 
-/*
-//Promise example
-exports.show = (req, res, next) => {
-  Post.findById(req.params.postid)
-    .exec()
-    .then((post) => {
-      res.render('post_detail', {
-        post: post,
-      });
-    });
-};
-*/
-
-// async
 exports.show = async (req, res, next) => {
   const post = await Post.findById(req.params.postid).exec();
-  // const comment = await Comment.find().exec();
 
   res.json({
     title: 'Post Details',

@@ -14,13 +14,6 @@ router.post(
   post_controller.create
 );
 
-router.get(
-  '/new',
-  passport.authenticate('jwt', { session: false }),
-  isAdmin,
-  post_controller.new
-);
-
 router.get('/:postid', post_controller.show);
 
 router.get(

@@ -4,19 +4,11 @@ const passport = require('passport');
 const User = require('../models/user');
 const { body, validationResult } = require('express-validator');
 
-exports.index = (req, res, next) => {
-  res.json({ title: 'Express' });
-};
-
-exports.login = (req, res, next) => {
-  res.send('login page');
-};
-
 exports.login_post = (req, res, next) => {
   passport.authenticate('local', { session: false }, (err, user, info) => {
     if (err || !user) {
       return res.status(400).json({
-        message: 'Something is not right',
+        message: 'Username and/or password are incorrect',
         user: user,
       });
     }
@@ -38,13 +30,8 @@ exports.login_post = (req, res, next) => {
         const token = jwt.sign(user.toJSON(), process.env.JWT_Secret);
         return res.json({ user, token });
       }
-      // return res.json({ user, token });
     });
   })(req, res);
-};
-
-exports.signUp = (req, res, next) => {
-  res.send('signup page');
 };
 
 exports.signUp_post = (req, res, next) => {
