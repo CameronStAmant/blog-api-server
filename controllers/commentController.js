@@ -3,7 +3,6 @@ const Post = require('../models/post');
 const User = require('../models/user');
 const passport = require('passport');
 require('../passport');
-
 const { body, validationResult } = require('express-validator');
 
 exports.create = [
@@ -70,7 +69,6 @@ exports.edit = async (req, res, next) => {
   const comment = await Comment.findById(req.params.commentId).exec();
 
   res.json({
-    title: 'Update Comment',
     comment: comment,
   });
 };
