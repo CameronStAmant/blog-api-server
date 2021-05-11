@@ -23,7 +23,7 @@ exports.login_post = (req, res, next) => {
           return res.json({ user, token });
         } else {
           return res.json({
-            response: 'Only admin are permitted to log into this site.',
+            message: 'Only admin are permitted to log into this site.',
           });
         }
       } else {
