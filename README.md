@@ -1,0 +1,1 @@
+This project is the server side of a blog. It communicates with two frontends, admin and client, to give different users access to various parts of the site, via REST API. It uses a MongoDB with Mongoose to work with the database. It also uses Passport for authentication.
