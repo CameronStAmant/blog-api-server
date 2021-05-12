@@ -61,7 +61,7 @@ exports.delete = (req, res, next) => {
     if (err) {
       return next(err);
     }
-    return;
+    return res.json({ delete: true });
   });
 };
 
@@ -78,7 +78,7 @@ exports.update = [
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.render('edit', {
+      res.json({
         body: req.body.body,
       });
       return;

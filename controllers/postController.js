@@ -17,7 +17,7 @@ exports.create = [
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.render('new', {
+      res.json({
         title: req.body.title,
         body: req.body.body,
         published: req.body.published,
@@ -65,7 +65,7 @@ exports.update = [
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.render('edit', {
+      res.json({
         title: req.body.title,
         body: req.body.body,
         published: req.body.published,
@@ -101,6 +101,6 @@ exports.delete = (req, res, next) => {
     if (err) {
       return next(err);
     }
-    return;
+    return res.json({ delete: true });
   });
 };
