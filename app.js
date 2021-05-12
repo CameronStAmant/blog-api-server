@@ -12,7 +12,6 @@ const compression = require('compression');
 const helmet = require('helmet');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 const commentsRouter = require('./routes/comments');
 
@@ -23,10 +22,6 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'mongo connection error'));
 
 const app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
 
 app.use(cors());
 app.use(logger('dev'));
@@ -39,12 +34,7 @@ app.use(compression());
 app.use(helmet());
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use(
-  '/posts',
-  // passport.authenticate('jwt', { session: false }),
-  postsRouter
-);
+app.use('/posts', postsRouter);
 app.use('/posts', commentsRouter);
 
 // catch 404 and forward to error handler
