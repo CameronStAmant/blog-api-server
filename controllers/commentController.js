@@ -26,10 +26,11 @@ exports.create = [
         const updatePost = async () => {
           const post = await Post.findById(req.params.postid);
           post.comments.push(comment._id);
-          await post.save();
+          await post.save().then((results) => {
+            return res.json({ commented: 'success' });
+          });
         };
         updatePost();
-        return res.json({ commented: 'success' });
       });
     }
   },
