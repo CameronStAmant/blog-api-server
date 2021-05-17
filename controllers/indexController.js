@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const express = require('express');
 const passport = require('passport');
 const User = require('../models/user');
+const bcrypt = require('bcryptjs');
+
 const { body, validationResult } = require('express-validator');
 
 exports.login_post = (req, res, next) => {
@@ -35,16 +37,18 @@ exports.login_post = (req, res, next) => {
 };
 
 exports.signUp_post = (req, res, next) => {
-  const user = new User({
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password,
-  }).save((err) => {
-    if (err) {
-      return next(err);
-    }
-    return res.json({
-      userCreation: 'success',
+  bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+    const user = new User({
+      username: req.body.username,
+      email: req.body.email,
+      password: hashedPassword,
+    }).save((err) => {
+      if (err) {
+        return next(err);
+      }
+      return res.json({
+        userCreation: 'success',
+      });
     });
   });
 };

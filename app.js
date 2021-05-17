@@ -10,6 +10,7 @@ const cors = require('cors');
 require('dotenv').config();
 const compression = require('compression');
 const helmet = require('helmet');
+const bcrypt = require('bcryptjs');
 
 const indexRouter = require('./routes/index');
 const postsRouter = require('./routes/posts');
