@@ -72,16 +72,13 @@ exports.update = [
       });
       return;
     } else {
-      const post = new Post({
-        title: req.body.title,
-        body: req.body.body,
-        published: req.body.published,
-        author: req.body.id,
-        _id: req.params.postid,
-      });
+      const updatePost = {};
+      updatePost.title = req.body.title;
+      updatePost.body = req.body.body;
+
       Post.findByIdAndUpdate(
         req.params.postid,
-        post,
+        updatePost,
         {},
         (err, updatedPost) => {
           if (err) {
