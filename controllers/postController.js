@@ -73,8 +73,16 @@ exports.update = [
       return;
     } else {
       const updatePost = {};
-      updatePost.title = req.body.title;
-      updatePost.body = req.body.body;
+      if (req.body.title) {
+        updatePost.title = req.body.title;
+      }
+      if (req.body.body) {
+        updatePost.body = req.body.body;
+      }
+
+      if (req.body.published !== undefined) {
+        updatePost.published = req.body.published;
+      }
 
       Post.findByIdAndUpdate(
         req.params.postid,
