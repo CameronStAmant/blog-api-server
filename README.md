@@ -1,4 +1,4 @@
-This project is the server side of a blog. It communicates with two frontends, admin and client, to give different users access to various parts of the site, via REST API. It uses a MongoDB with Mongoose to work with the database. It also uses Passport for authentication. Demos and repos for both frontends and the backend can be found below:
+This project is the server side of a blog. It communicates with two frontends, admin and client, to give different users access to various parts of the site, via REST API. It uses a MongoDB with Mongoose to work with the database. It also uses Passport for authentication. Demos, credentials, and repos for both frontends and the backend can be found below:
 
 Client frontend:
 
@@ -13,3 +13,13 @@ Admin frontend:
 Server:
 
 - Repo: https://github.com/CameronStAmant/blog-api-server
+
+Normal user:
+
+- Username: user1
+- Password: user1
+
+Admin:
+
+- Username: admin
+- Password: admin
