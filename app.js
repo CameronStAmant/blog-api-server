@@ -16,8 +16,14 @@ const indexRouter = require('./routes/index');
 const postsRouter = require('./routes/posts');
 const commentsRouter = require('./routes/comments');
 
-mongoose.set('useFindAndModify', false);
-const mongoDB = process.env.MONGODB_URI;
+let mongoDB;
+
+if (process.env.NODE_ENV === 'development') {
+  mongoDB = process.env.DEVELOPMENT_MONGODB_URI;
+} else {
+  mongoDB = process.env.MONGODB_URI;
+}
+
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'mongo connection error'));

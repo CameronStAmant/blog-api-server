@@ -21,7 +21,7 @@ exports.login_post = (req, res, next) => {
       }
       if (req.body.adminSite) {
         if (user.admin) {
-          const token = jwt.sign(user.toJSON(), process.env.JWT_Secret);
+          const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET);
           return res.json({ user, token });
         } else {
           return res.json({
@@ -29,7 +29,7 @@ exports.login_post = (req, res, next) => {
           });
         }
       } else {
-        const token = jwt.sign(user.toJSON(), process.env.JWT_Secret);
+        const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET);
         return res.json({ user, token });
       }
     });
