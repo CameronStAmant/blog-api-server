@@ -19,17 +19,20 @@ exports.create = [
     if (!errors.isEmpty()) {
       res.json({
         title: req.body.title,
+        coverPhoto: req.file.filename,
         body: req.body.body,
-        published: req.body.published,
+        published: false,
       });
       return;
     } else {
       const post = new Post({
         title: req.body.title,
+        coverPhoto: req.file.filename,
         body: req.body.body,
         published: req.body.published,
         author: req.body.author,
       });
+
       post.save((err) => {
         if (err) {
           return next(err);
@@ -67,15 +70,21 @@ exports.update = [
     if (!errors.isEmpty()) {
       res.json({
         title: req.body.title,
+        coverPhoto: req.file.filename,
         body: req.body.body,
         published: req.body.published,
       });
+
       return;
     } else {
       const updatePost = {};
       if (req.body.title) {
         updatePost.title = req.body.title;
       }
+      if (req.file) {
+        updatePost.coverPhoto = req.file.filename;
+      }
+
       if (req.body.body) {
         updatePost.body = req.body.body;
       }
