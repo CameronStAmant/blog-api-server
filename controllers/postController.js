@@ -1,4 +1,6 @@
 const Post = require('../models/post');
+const Comment = require('../models/comment');
+
 const { body, validationResult } = require('express-validator');
 
 exports.index = async (req, res, next) => {
@@ -110,7 +112,16 @@ exports.update = [
   },
 ];
 
-exports.delete = (req, res, next) => {
+exports.delete = async (req, res, next) => {
+  const post = await Post.findById(req.params.postid).exec();
+  for (let i = 0; i < post.comments.length; i++) {
+    Comment.findByIdAndDelete(post.comments[i], (err) => {
+      if (err) {
+        return next(err);
+      }
+    });
+  }
+
   Post.findByIdAndDelete(req.params.postid, (err) => {
     if (err) {
       return next(err);
