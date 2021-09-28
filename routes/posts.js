@@ -3,16 +3,17 @@ const router = express.Router();
 const isAdmin = require('../isAdmin');
 const passport = require('passport');
 const multer = require('multer');
+var cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 const post_controller = require('../controllers/postController');
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads/');
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + '-' + file.originalname);
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'blog',
+    format: async (req, file) => 'jpg', // supports promises as well
+    public_id: (req, file) => file.filename,
   },
 });
 

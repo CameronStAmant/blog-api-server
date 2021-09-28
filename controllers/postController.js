@@ -1,10 +1,14 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
+const cloudinary = require('cloudinary').v2;
 
 const { body, validationResult } = require('express-validator');
 
 exports.index = async (req, res, next) => {
   const posts = await Post.find().sort({ timestamp: 'desc' }).exec();
+  posts.forEach(
+    (element) => (element.coverPhoto = cloudinary.url(element.coverPhoto))
+  );
 
   res.json({
     title: 'All Posts',
@@ -49,6 +53,7 @@ exports.create = [
 
 exports.show = async (req, res, next) => {
   const post = await Post.findById(req.params.postid).exec();
+  post.coverPhoto = cloudinary.url(post.coverPhoto);
 
   res.json({
     title: 'Post Details',
@@ -58,6 +63,8 @@ exports.show = async (req, res, next) => {
 
 exports.edit = async (req, res, next) => {
   const post = await Post.findById(req.params.postid).exec();
+  post.coverPhoto = cloudinary.url(post.coverPhoto);
+
   res.json({
     post: post,
   });
